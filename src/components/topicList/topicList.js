@@ -32,6 +32,8 @@ const TopicList = () => {
   };
 
   const deleteAndRefreshTopics = (topicId) => {
+    if (!window.confirm('This is going to destroy this Topic completely, are you sure to go?')) return
+
     deleteTopic(topicId)
       .then(res => {
         refreshTopics()
