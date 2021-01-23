@@ -8,7 +8,7 @@ const Topic = (props) => {
       <td>{props.startDate}</td>
       <td>{props.detail}</td>
       <td>{props.vote}</td>
-      <td></td>
+      <td data-next-vote={props.vote + 1} onClick={() => props.likeIt(props._id, props.vote + 1)}> Vote </td>
     </tr>
   )
 }
