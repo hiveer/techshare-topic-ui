@@ -9,6 +9,7 @@ const Topic = (props) => {
       <td>{props.detail}</td>
       <td>{props.vote}</td>
       <td data-next-vote={props.vote + 1} onClick={() => props.likeIt(props._id, props.vote + 1)}> Vote </td>
+      <td data-topic-id={props._id} onClick={() => props.deleteIt(props._id)}> Delete </td>
     </tr>
   )
 }

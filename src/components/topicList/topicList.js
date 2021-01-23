@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Topic from '../topic/topic.js'
-import { updateTopic, refreshTopics } from '../shared/httpTopicProxy.js'
+import { updateTopic, refreshTopics, deleteTopic } from '../shared/httpTopicProxy.js'
 
 const TopicList = () => {
   let [list, setList] = useState([]);
@@ -31,6 +31,19 @@ const TopicList = () => {
       });
   };
 
+  const deleteAndRefreshTopics = (topicId) => {
+    deleteTopic(topicId)
+      .then(res => {
+        refreshTopics()
+          .then(result => {
+            result.sort((element1, element2) => {
+              return element2.vote - element1.vote;
+            });
+            setList(result);
+          })
+      })
+  }
+
   return (
     <div>
       <table>
@@ -42,11 +55,17 @@ const TopicList = () => {
             <th>Detail</th>
             <th>Heat</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           {
-            list.map((topic) => <Topic key={topic._id} {...topic} likeIt={(topicId, newVote) => voteAndRefreshTopics(topicId, newVote)} />)
+            list.map((topic) => <Topic
+                                  key={topic._id}
+                                  {...topic}
+                                  likeIt={(topicId, newVote) => voteAndRefreshTopics(topicId, newVote)}
+                                  deleteIt={(topicId) => deleteAndRefreshTopics(topicId) }
+                                />)
           }
         </tbody>
       </table>

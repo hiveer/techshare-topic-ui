@@ -16,4 +16,12 @@ const refreshTopics = async () => {
   return response.json();
 }
 
-export {updateTopic, refreshTopics};
+const deleteTopic = async (topicId) => {
+  const response = await fetch(`${topicsUrl}/${topicId}`, {
+    method: 'DELETE',
+    body: {}
+  });
+  return response.json();
+}
+
+export {updateTopic, refreshTopics, deleteTopic};
