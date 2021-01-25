@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import Topic from '../topic/topic.js'
-import { updateTopic, refreshTopics, deleteTopic } from '../shared/httpTopicProxy.js'
+import CreateTopicForm from '../createTopic/createTopicForm.js'
+import { updateTopic, refreshTopics, deleteTopic, createTopic } from '../shared/httpTopicProxy.js'
 
 const TopicList = () => {
   let [list, setList] = useState([]);
+  let [showCreate, setShowCreate] = useState(false);
 
   useEffect(() => {
     refreshTopics()
@@ -46,6 +48,19 @@ const TopicList = () => {
       })
   }
 
+  const createAndRefreshTopics = (topicParams) => {
+    createTopic(topicParams)
+      .then(res => {
+        refreshTopics()
+          .then(result => {
+            result.sort((element1, element2) => {
+              return element2.vote - element1.vote;
+            });
+            setList(result);
+          })
+      })
+  }
+
   return (
     <div>
       <table>
@@ -71,6 +86,16 @@ const TopicList = () => {
           }
         </tbody>
       </table>
+
+      { !showCreate &&
+        <p onClick={() => setShowCreate(true)}> Create Topic </p>
+      }
+
+      { showCreate &&
+        <CreateTopicForm
+          createIt={(topicParams) => createAndRefreshTopics(topicParams)}
+        />
+      }
     </div>
   )
 }
