@@ -4,6 +4,7 @@ import CreateTopicForm from '../createTopic/createTopicForm.js'
 import { updateTopic, refreshTopics, deleteTopic, createTopic } from '../shared/httpTopicProxy.js'
 
 import './topicList.scss'
+import expandIcon from './images/expandIcon.png'
 
 const TopicList = () => {
   let [list, setList] = useState([]);
@@ -65,7 +66,7 @@ const TopicList = () => {
 
   return (
     <div className="topiclist__div-page">
-      <table className="topiclist__table" cellspacing="0" cellpadding="0">
+      <table className="topiclist__table" cellSpacing="0" cellPadding="0">
         <thead>
           <tr>
             <th></th>
@@ -90,7 +91,10 @@ const TopicList = () => {
       </table>
 
       { !showCreate &&
-        <p onClick={() => setShowCreate(true)}> Create Topic </p>
+        <p className="topic-list__p--expand-topic-form" onClick={() => setShowCreate(true)}>
+          Create Topic
+          <img className="" src={expandIcon} />
+        </p>
       }
 
       { showCreate &&

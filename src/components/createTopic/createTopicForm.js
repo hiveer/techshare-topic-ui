@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import StringCheck from '../shared/stringCheck.js'
+import './createTopicForm.scss'
 
 const CreateTopicForm = (props) => {
   let [topicTitle, setTopicTitle] = useState('');
@@ -27,7 +28,7 @@ const CreateTopicForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="create-topic__form" onSubmit={handleSubmit}>
       <div className="form-group">
         <input type="text"
                className="form-control"
@@ -68,11 +69,11 @@ const CreateTopicForm = (props) => {
         <textarea className="form-control"
                   id="detail"
                   placeholder="detail"
+                  rows="6"
                   onChange={(event) => setDetail(event.target.value)}
         />
       </div>
-
-      <input type="submit" value="Submit" />
+      <button type="submit" className="btn btn-warning">Create Topic</button>
     </form>
   )
 }

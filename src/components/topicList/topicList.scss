@@ -1,7 +1,8 @@
 .topiclist__table {
   border: none;
   width: 100%;
-  border-spacing: 0 5px;
+  border-collapse:separate;
+  border-spacing:0 8px;
   tr {
     background-color: #e4eceb;
   }
@@ -11,5 +12,11 @@
   th, td {
     text-align: center;
     padding: 8px;
+  }
+}
+
+.topic-list__p--expand-topic-form {
+  &:hover {
+    cursor: pointer;
   }
 }
