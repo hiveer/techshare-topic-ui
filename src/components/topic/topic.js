@@ -1,4 +1,5 @@
 import React from 'react'
+import SanitizedHTML from 'react-sanitized-html';
 import './topic.scss'
 
 const Topic = (props) => {
@@ -8,7 +9,9 @@ const Topic = (props) => {
       <td>{props.topicTitle}</td>
       <td>{props.owner}</td>
       <td>{props.startDate}</td>
-      <td className="topic__td--detail" >{props.detail}</td>
+      <td className="topic__td--detail" >
+        <SanitizedHTML html={props.detail.replace(/(\r\n|\r|\n)/g, "<br />" )} />
+      </td>
       <td>{props.vote}</td>
       <td className="topic__td--delete" data-topic-id={props._id} onClick={() => props.deleteIt(props._id)}> Delete </td>
     </tr>
