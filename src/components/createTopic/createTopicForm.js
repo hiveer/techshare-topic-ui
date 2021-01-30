@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import StringCheck from '../shared/stringCheck.js'
 import './createTopicForm.scss'
 
+import expandLessIcon from './images/expandLessIcon.png'
+
 const CreateTopicForm = (props) => {
   let [topicTitle, setTopicTitle] = useState('');
   let [owner, setOwner] = useState('');
@@ -74,7 +76,10 @@ const CreateTopicForm = (props) => {
         />
       </div>
       <button type="submit" className="btn btn-warning">Create Topic</button>
-      <button type="button" className="btn btn-info" onClick={props.cancelIt}>Cancel</button>
+      <button type="button" className="btn btn-info create-topic-form__btn--cancel" onClick={props.cancelIt}>
+        Cancel
+        <img className="" src={expandLessIcon} />
+      </button>
     </form>
   )
 }
