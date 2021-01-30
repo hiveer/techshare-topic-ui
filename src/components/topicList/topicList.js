@@ -20,6 +20,16 @@ const TopicList = () => {
       })
   }, [JSON.stringify(list)]);
 
+  useEffect(() => {
+    if (showCreate == true) {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+  })
+
   const voteAndRefreshTopics = (topicId, newVote) => {
     updateTopic(topicId, {vote: newVote})
       .then(res => {
@@ -62,7 +72,7 @@ const TopicList = () => {
             setList(result);
           })
       })
-  }
+  };
 
   return (
     <div className="topiclist__div-page">
@@ -100,6 +110,7 @@ const TopicList = () => {
       { showCreate &&
         <CreateTopicForm
           createIt={(topicParams) => createAndRefreshTopics(topicParams)}
+          cancelIt={() => setShowCreate(false)}
         />
       }
     </div>

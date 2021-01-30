@@ -74,6 +74,7 @@ const CreateTopicForm = (props) => {
         />
       </div>
       <button type="submit" className="btn btn-warning">Create Topic</button>
+      <button type="button" className="btn btn-info" onClick={props.cancelIt}>Cancel</button>
     </form>
   )
 }
