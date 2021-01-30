@@ -3,6 +3,8 @@ import Topic from '../topic/topic.js'
 import CreateTopicForm from '../createTopic/createTopicForm.js'
 import { updateTopic, refreshTopics, deleteTopic, createTopic } from '../shared/httpTopicProxy.js'
 
+import './topicList.scss'
+
 const TopicList = () => {
   let [list, setList] = useState([]);
   let [showCreate, setShowCreate] = useState(false);
@@ -62,16 +64,16 @@ const TopicList = () => {
   }
 
   return (
-    <div>
-      <table>
+    <div className="topiclist__div-page">
+      <table className="topiclist__table" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
+            <th></th>
             <th>Title</th>
             <th>Owner</th>
             <th>StartDate</th>
             <th>Detail</th>
             <th>Heat</th>
-            <th></th>
             <th></th>
           </tr>
         </thead>

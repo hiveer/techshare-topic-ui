@@ -1,0 +1,15 @@
+.topiclist__table {
+  border: none;
+  width: 100%;
+  border-spacing: 0 5px;
+  tr {
+    background-color: #e4eceb;
+  }
+  tr td:first-child, tr td:last-child {
+    border-radius: 10px;
+  }
+  th, td {
+    text-align: center;
+    padding: 8px;
+  }
+}

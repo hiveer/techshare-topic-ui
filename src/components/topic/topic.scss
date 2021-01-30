@@ -1,0 +1,19 @@
+.topic__td--vote {
+  background-color: #87b487;
+  color: white;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.topic__td--delete {
+  background-color: #d56a6a;
+  color: white;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.topic__td--detail {
+  max-width: 200px;
+}
