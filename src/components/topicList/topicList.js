@@ -5,6 +5,7 @@ import { updateTopic, refreshTopics, deleteTopic, createTopic } from '../shared/
 
 import './topicList.scss'
 import expandIcon from './images/expandIcon.png'
+import lovePng from './images/love.png'
 
 const TopicList = () => {
   let [list, setList] = useState([]);
@@ -82,9 +83,12 @@ const TopicList = () => {
             <th></th>
             <th>Title</th>
             <th>Owner</th>
-            <th>StartDate</th>
+            <th>ShareDate</th>
             <th>Detail</th>
-            <th>Heat</th>
+            <th>
+              Vote
+              <img className="topic__img--love" src={lovePng} />
+            </th>
             <th></th>
           </tr>
         </thead>

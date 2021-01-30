@@ -14,9 +14,8 @@ const CreateTopicForm = (props) => {
   const handleSubmit = (event) => {
     if (StringCheck.isBlank(topicTitle) ||
        StringCheck.isBlank(owner) ||
-       StringCheck.isBlank(startDate) ||
        StringCheck.isBlank(detail)) {
-      alert('Please provide valid data!');
+      alert("topicTitle, owner, detail are required!");
       return event.preventDefault();
     }
 
@@ -70,7 +69,7 @@ const CreateTopicForm = (props) => {
       <div className="form-group">
         <textarea className="form-control"
                   id="detail"
-                  placeholder="detail"
+                  placeholder="detail(support line break)"
                   rows="6"
                   onChange={(event) => setDetail(event.target.value)}
         />

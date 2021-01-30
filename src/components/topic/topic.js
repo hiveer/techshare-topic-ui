@@ -2,10 +2,14 @@ import React from 'react'
 import SanitizedHTML from 'react-sanitized-html';
 import './topic.scss'
 
+import lovePng from './images/love.png'
+
 const Topic = (props) => {
   return (
     <tr>
-      <td className="topic__td--vote" data-next-vote={props.vote + 1} onClick={() => props.likeIt(props._id, props.vote + 1)}> Vote </td>
+      <td className="topic__td--vote" data-next-vote={props.vote + 1} onClick={() => props.likeIt(props._id, props.vote + 1)}>
+        <img className="topic__img--love" src={lovePng} />
+      </td>
       <td>{props.topicTitle}</td>
       <td>{props.owner}</td>
       <td>{props.startDate}</td>
