@@ -1,14 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.css';
 
 import TopicList from './components/topicList/topicList.js'
+import HeaderNav from './components/headerNav/headerNav.js'
 import './App.css'
 
 function App() {
   return (
-    <div className="TechSharingTopics">
-      <h2>Tech Sharing Topics</h2>
-      <TopicList />
-    </div>
+    <>
+      <HeaderNav />
+      <div className="TechSharingTopics">
+        <TopicList />
+      </div>
+    </>
   );
 }
 
