@@ -23,9 +23,9 @@ const Topic = (props) => {
       </td>
       <td>{props.vote}</td>
       {props.listType == 'archived' ? <td>Archived</td> :
-        <td className="topic__td--archive topic__td--btn" onClick={() => props.archiveIt(props._id)}>Archive</td>
+        <td className="topic__td--archive topic__td--btn topic__td--btn-fix-width" onClick={() => props.archiveIt(props._id)}>Archive</td>
       }
-      <td className="topic__td--delete topic__td--btn" data-topic-id={props._id} onClick={() => props.deleteIt(props._id)}>Delete</td>
+      <td className="topic__td--delete topic__td--btn topic__td--btn-fix-width" data-topic-id={props._id} onClick={() => props.deleteIt(props._id)}>Delete</td>
     </tr>
   )
 }
