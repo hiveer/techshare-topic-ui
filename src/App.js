@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.css';
 
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Switch,
   Route,
-  Link
+  Redirect
 } from "react-router-dom";
 
 import TopicList from './components/topicList/topicList.js'
@@ -13,19 +13,26 @@ import './App.css'
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <HeaderNav />
       <div className="TechSharingTopics">
         <Switch>
-          <Route path="/">
-            <TopicList />
+          <Route exact path="/">
+            <Redirect to="/active-topics" />
           </Route>
-          <Route path="/active-topics">
-            <TopicList />
-          </Route>
+
+          <Route
+            path="/active-topics"
+            render={() => <TopicList key={2} listType='active'/>}
+          />
+
+          <Route
+            path="/archived-topics"
+            render={() => <TopicList key={3} listType='archived'/>}
+          />
         </Switch>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

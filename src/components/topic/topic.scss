@@ -14,10 +14,22 @@
   }
 }
 
+.topic__td--archive {
+  background-color: #836d17b3;
+  color: white;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .topic__td--detail {
   max-width: 200px;
 }
 
 .topic__img--love {
   height: 15px;
+}
+
+.topic__td--btn {
+  border-radius: 10px;
 }

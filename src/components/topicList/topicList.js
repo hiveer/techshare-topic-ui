@@ -1,15 +1,24 @@
 import React, {useState, useEffect} from 'react'
 import Topic from '../topic/topic.js'
 import CreateTopicForm from '../createTopic/createTopicForm.js'
-import { updateTopic, refreshTopics, deleteTopic, createTopic } from '../shared/httpTopicProxy.js'
+import { updateTopic, activeTopics, archivedTopics, deleteTopic, createTopic } from '../shared/httpTopicProxy.js'
 
 import './topicList.scss'
 import expandIcon from './images/expandIcon.png'
 import lovePng from './images/love.png'
 
-const TopicList = () => {
+const TopicList = (props) => {
   let [list, setList] = useState([]);
   let [showCreate, setShowCreate] = useState(false);
+
+  const refreshTopics = () => {
+    console.log(props.listType);
+    if (props.listType == 'archived') {
+      return archivedTopics();
+    } else {
+      return activeTopics();
+    }
+  };
 
   useEffect(() => {
     refreshTopics()
@@ -33,6 +42,22 @@ const TopicList = () => {
 
   const voteAndRefreshTopics = (topicId, newVote) => {
     updateTopic(topicId, {vote: newVote})
+      .then(res => {
+        refreshTopics()
+          .then(result => {
+            result.sort((element1, element2) => {
+              return element2.vote - element1.vote;
+            });
+            setList(result);
+          })
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+
+  const archiveAndRefreshTopics = (topicId) => {
+    updateTopic(topicId, {status: 'archived'})
       .then(res => {
         refreshTopics()
           .then(result => {
@@ -76,7 +101,7 @@ const TopicList = () => {
   };
 
   return (
-    <div className="topiclist__div-page">
+    <div className="topiclist__div-page" id={props.listType}>
       <table className="topiclist__table" cellSpacing="0" cellPadding="0">
         <thead>
           <tr>
@@ -90,28 +115,31 @@ const TopicList = () => {
               <img className="topic__img--love" src={lovePng} />
             </th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           {
             list.map((topic) => <Topic
                                   key={topic._id}
+                                  {...props}
                                   {...topic}
                                   likeIt={(topicId, newVote) => voteAndRefreshTopics(topicId, newVote)}
-                                  deleteIt={(topicId) => deleteAndRefreshTopics(topicId) }
+                                  deleteIt={(topicId) => deleteAndRefreshTopics(topicId)}
+                                  archiveIt={(topicId) => archiveAndRefreshTopics(topicId)}
                                 />)
           }
         </tbody>
       </table>
 
-      { !showCreate &&
+      { props.listType != 'archived' && !showCreate &&
         <p className="topic-list__p--expand-topic-form" onClick={() => setShowCreate(true)}>
           Create Topic
           <img className="" src={expandIcon} />
         </p>
       }
 
-      { showCreate &&
+      { props.listType != 'archived' && showCreate &&
         <CreateTopicForm
           createIt={(topicParams) => createAndRefreshTopics(topicParams)}
           cancelIt={() => setShowCreate(false)}

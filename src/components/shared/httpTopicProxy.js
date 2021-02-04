@@ -23,10 +23,20 @@ const updateTopic = async (topicId, data = {}) => {
   return response.json();
 }
 
-const refreshTopics = async () => {
-  const response = await fetch(topicsUrl);
+const refreshTopics = async (params={}) => {
+  let url = new URL(topicsUrl);
+  Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+  const response = await fetch(url);
   return response.json();
 }
+
+const activeTopics = async () => {
+  return refreshTopics({status: 'active'});
+};
+
+const archivedTopics = async () => {
+  return refreshTopics({status: 'archived'});
+};
 
 const deleteTopic = async (topicId) => {
   const response = await fetch(`${topicsUrl}/${topicId}`, {
@@ -36,4 +46,4 @@ const deleteTopic = async (topicId) => {
   return response.json();
 }
 
-export {updateTopic, refreshTopics, deleteTopic, createTopic};
+export {updateTopic, refreshTopics, activeTopics, archivedTopics, deleteTopic, createTopic};
