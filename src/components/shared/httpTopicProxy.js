@@ -1,7 +1,7 @@
-const topicsUrl = 'http://localhost:3600/topics';
+const { REACT_APP_TOPICS_URL } = process.env;
 
 const createTopic = async (topicData = {}) => {
-  const response = await fetch(topicsUrl, {
+  const response = await fetch(REACT_APP_TOPICS_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -13,7 +13,7 @@ const createTopic = async (topicData = {}) => {
 }
 
 const updateTopic = async (topicId, data = {}) => {
-  const response = await fetch(`${topicsUrl}/${topicId}`, {
+  const response = await fetch(`${REACT_APP_TOPICS_URL}/${topicId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ const updateTopic = async (topicId, data = {}) => {
 }
 
 const refreshTopics = async (params={}) => {
-  let url = new URL(topicsUrl);
+  let url = new URL(REACT_APP_TOPICS_URL);
   Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
   const response = await fetch(url);
   return response.json();
@@ -39,7 +39,7 @@ const archivedTopics = async () => {
 };
 
 const deleteTopic = async (topicId) => {
-  const response = await fetch(`${topicsUrl}/${topicId}`, {
+  const response = await fetch(`${REACT_APP_TOPICS_URL}/${topicId}`, {
     method: 'DELETE',
     body: {}
   });
