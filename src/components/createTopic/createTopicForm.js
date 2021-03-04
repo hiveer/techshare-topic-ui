@@ -12,11 +12,13 @@ const CreateTopicForm = (props) => {
   let [detail, setDetail] = useState('');
 
   const handleSubmit = (event) => {
+    event.preventDefault();
+
     if (StringCheck.isBlank(topicTitle) ||
        StringCheck.isBlank(owner) ||
        StringCheck.isBlank(detail)) {
       alert("topicTitle, owner, detail are required!");
-      return event.preventDefault();
+      return;
     }
 
     props.createIt({

@@ -96,6 +96,7 @@ const TopicList = (props) => {
               return element2.vote - element1.vote;
             });
             setList(result);
+            setShowCreate(false);
           })
       })
   };
